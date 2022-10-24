@@ -1,10 +1,9 @@
-from ast import Delete
 from tkinter import *
 import tkinter.messagebox
 from tkinter.ttk import Labelframe
 import kinotekos_backendas
 
-class Kinas():
+class Kinas:
     def __init__(self, root):
         self.root = root
         self.root.title("Tiketa")
@@ -44,6 +43,36 @@ class Kinas():
                 FilmuSarasas.delete(0,END)
                 FilmuSarasas.insert(END,(kino_ID.get(), kino_pavadinimas.get(), isleidimo_data.get(), kino_biudzetas.get(), reitingas.get()))
 
+        def istrinti_data():
+            if(len(kino_ID.get())!=0):
+                kinotekos_backendas.istrinti_kino_data
+                cleardata()
+        
+        def filmusarasas(event):
+            global sd
+            pasirinkti_filma=FilmuSarasas.curselection()[0]
+            sd=FilmuSarasas.get(pasirinkti_filma)
+
+            self.txtkino_ID.delete(0,END)
+            self.txtkino_ID.insert(END,sd[1])
+            self.txtkino_pavadinimas.delete(0,END)
+            self.txtkino_pavadinimas.insert(END,sd[2])
+            self.txtisleidimo_data.delete(0,END)
+            self.txtisleidimo_data.insert(END,sd[3])
+            self.txtkino_biudzetas.delete(0,END)
+            self.txtkino_biudzetas.insert(END,sd[6])
+            self.txtreitingas.delete(0,END)
+            self.txtreitingas.insert(END,sd[8])
+
+            def updata():
+                if(len(kino_ID.get())!=0):
+                    kinotekos_backendas.istrinti_kino_data(sd[0])
+                if(len(kino_ID.get())!=0):
+                    kinotekos_backendas.prideti_filma(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get())
+                    FilmuSarasas.delete(0,END)
+                    FilmuSarasas.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(), kino_biudzetas.get(), reitingas.get()))
+
+        
         # Frame'ai
         Pagrindinis_Fr=Frame(self.root, bg="black")
         Pagrindinis_Fr.grid()
@@ -99,7 +128,7 @@ class Kinas():
         sb.grid(row=0, column=1, sticky='ns')
 
         FilmuSarasas=Listbox(Vidinis_FrR, width=41, height=16, font=('Arial', 12, 'bold'), bg="black", fg="white", yscrollcommand=sb.set)
-        FilmuSarasas.bind('<<Sarasas>>', movierec)
+        FilmuSarasas.bind('<<Sarasas>>', filmusarasas)
         FilmuSarasas.grid(row=0, column=0, padx=8)
         sb.config(command=FilmuSarasas.yview)
         
@@ -108,16 +137,16 @@ class Kinas():
         self.btnadd=Button(Apatinis_Fr, text="Prideti Nauja", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=prideti_data)
         self.btnadd.grid(row=0, column=0)
 
-        self.btndis=Button(Apatinis_Fr, text="Rodyti Visus", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange")
+        self.btndis=Button(Apatinis_Fr, text="Rodyti Visus", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=filmusarasas)
         self.btndis.grid(row=0, column=1)
 
-        self.btnclc=Button(Apatinis_Fr, text="Isvalyti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange")
+        self.btnclc=Button(Apatinis_Fr, text="Isvalyti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=cleardata)
         self.btnclc.grid(row=0, column=2)
 
-        self.btndel=Button(Apatinis_Fr, text="Istrinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange")
+        self.btndel=Button(Apatinis_Fr, text="Istrinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=istrinti_data)
         self.btndel.grid(row=0, column=4)
 
-        self.btnup=Button(Apatinis_Fr, text="Atnaujinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange")
+        self.btnup=Button(Apatinis_Fr, text="Atnaujinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=filmusarasas)
         self.btnup.grid(row=0, column=5)
 
         self.btnx=Button(Apatinis_Fr, text="Isjungti Programa", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=iseiti)
