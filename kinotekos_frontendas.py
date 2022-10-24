@@ -42,8 +42,6 @@ class Kinas:
             for row in kinotekos_backendas.kinu_datos_perziura():
                 FilmuSarasas.insert(END, row, str(""))
 
-                
-
         def filmusarasas(event):
             global sd
             pasirinkti_filma=FilmuSarasas.curselection()[0]
@@ -59,6 +57,11 @@ class Kinas:
             self.txtkino_biudzetas.insert(END,sd[6])
             self.txtreitingas.delete(0,END)
             self.txtreitingas.insert(END,sd[8])
+
+        def searchdb():
+            FilmuSarasas.delete(0,END)
+            for row in kinotekos_backendas.kinu_datos_perziura(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(), kino_biudzetas.get(), reitingas.get()):
+                    FilmuSarasas.insert(END, row, str(""))
 
         def istrinti_data():
             if(len(kino_ID.get())!=0):
@@ -139,7 +142,7 @@ class Kinas:
         self.btnadd=Button(Apatinis_Fr, text="Prideti Nauja", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=prideti_data)
         self.btnadd.grid(row=0, column=0)
 
-        self.btndis=Button(Apatinis_Fr, text="Rodyti Visus", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange")
+        self.btndis=Button(Apatinis_Fr, text="Atsirinkti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=searchdb)
         self.btndis.grid(row=0, column=1)
 
         self.btnclc=Button(Apatinis_Fr, text="Isvalyti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=disdata)
