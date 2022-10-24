@@ -45,9 +45,16 @@ class Kinas():
         Pagrindinis_Fr=Frame(self.root, bg="black")
         Pagrindinis_Fr.grid()
 
+        Virsutinis_Fr=Frame(Pagrindinis_Fr, bd=5, padx=54, pady=8, bg="black", relief=RIDGE)
+        Virsutinis_Fr.pack(side=TOP)
+
+        self.Virsutinis_Fr = Label(Virsutinis_Fr, font=("Arial", 51, "bold"), text="Kinoteatro Filmu Data", bg="black", fg="orange")
+        self.Virsutinis_Fr.grid()
+
+        Apatinis_Fr = Frame(Pagrindinis_Fr, bd=2, width=1300, height=400, padx=20, bg="black", relief=RIDGE)
+        Apatinis_Fr.pack(side=BOTTOM)
+
         
-
-
         # Listbox'as ir Scrollbar'as
 
         sb=Scrollbar(DFrameR)
