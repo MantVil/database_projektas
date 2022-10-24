@@ -15,13 +15,12 @@ kursorius.execute("""
     """
     )
 con.commit()
-con.close()
 
 def prideti_filma(kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas):
-    kursorius.execute("INSERT INTO kinoteka VALUE (NUL, ?,?,?,?,?)", (kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas))
+    kursorius.execute("INSERT INTO kinoteka VALUES (NULL, ?,?,?,?,?)", (kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas))
     con.commit()
     con.close()
-
+    
 def kinu_datos_perziura():
     kursorius.execute("SELECT * FROM kinoteka")
     viska = kursorius.fetchall()
@@ -38,4 +37,3 @@ def redaguoti_kino_data(id, kino_ID="", kino_pavadinimas="", isleidimo_data="", 
     (kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas))
     con.commit()
     con.close()
-

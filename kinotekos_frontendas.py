@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter.messagebox
-from tkinter.ttk import Labelframe
 import kinotekos_backendas
+
 
 class Kinas:
     def __init__(self, root):
@@ -17,7 +17,6 @@ class Kinas:
         reitingas=StringVar()
 
         # Funkcijos
-
         def iseiti():
             iseiti = tkinter.messagebox.askyesno("Tiketa", "Ar tikrai norite iseiti???")
             if iseiti>0:
@@ -33,13 +32,7 @@ class Kinas:
 
         def prideti_data():
             if(len(kino_ID.get())!=0):
-                kinotekos_backendas.prideti_filma(
-                    kino_ID.get(), 
-                    kino_pavadinimas.get(),
-                    isleidimo_data.get(),
-                    kino_biudzetas.get(),
-                    reitingas.get()
-                )
+                kinotekos_backendas.prideti_filma(kino_ID.get(), kino_pavadinimas.get(), isleidimo_data.get(), kino_biudzetas.get(), reitingas.get())
                 FilmuSarasas.delete(0,END)
                 FilmuSarasas.insert(END,(kino_ID.get(), kino_pavadinimas.get(), isleidimo_data.get(), kino_biudzetas.get(), reitingas.get()))
 
@@ -92,7 +85,7 @@ class Kinas:
         Vidinis_FrL = LabelFrame(Vidinis_Fr, bd=2, width=1000, height=600,padx=20, bg="black", relief=RIDGE, font=("Arial", 20, "bold"), text="Kinu Info_\n",fg="white")
         Vidinis_FrL.pack(side=LEFT)
 
-        Vidinis_FrR = Labelframe(Vidinis_Fr, bd=2, width=450, height=300, padx=31, pady=3, bg="black", relief=RIDGE, font=("Arial", 20, "bold"), text="Kinu Smulki Info_\n", fg="white")
+        Vidinis_FrR = LabelFrame(Vidinis_Fr, bd=2, width=450, height=300, padx=31, pady=3, bg="black", relief=RIDGE, font=("Arial", 20, "bold"), text="Kinu Smulki Info_\n", fg="white")
         Vidinis_FrR.pack(side=RIGHT)
 
         # Label'iai ir Entry boxai
@@ -149,7 +142,7 @@ class Kinas:
         self.btnup=Button(Apatinis_Fr, text="Atnaujinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=filmusarasas)
         self.btnup.grid(row=0, column=5)
 
-        self.btnx=Button(Apatinis_Fr, text="Isjungti Programa", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=iseiti)
+        self.btnx=Button(Apatinis_Fr, text="Isjungti Programa", font=('Arial', 20, 'bold'), width=14, height=1, bd=4, bg="orange", command=iseiti)
         self.btnx.grid(row=0, column=6)
         
 
