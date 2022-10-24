@@ -21,3 +21,9 @@ def prideti_filma(kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, rei
     kursorius.execute("INSERT INTO kinoteka VALUE (NUL, ?,?,?,?,?)", (kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas))
     con.commit()
     con.close()
+
+def kinu_datos_perziura():
+    kursorius.execute("SELECT * FROM kinoteka")
+    viska = kursorius.fetchall()
+    con.close()
+    return viska
