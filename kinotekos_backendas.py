@@ -38,3 +38,4 @@ def redaguoti_kino_data(id, kino_ID="", kino_pavadinimas="", isleidimo_data="", 
     (kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas))
     con.commit()
     con.close()
+
