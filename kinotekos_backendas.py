@@ -27,3 +27,8 @@ def kinu_datos_perziura():
     viska = kursorius.fetchall()
     con.close()
     return viska
+
+def istrinti_kino_data(id):
+    kursorius.execute("DELETE FROM kinoteka WHERE id=?", (id))
+    con.commit()
+    con.close()
