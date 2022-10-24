@@ -32,3 +32,9 @@ def istrinti_kino_data(id):
     kursorius.execute("DELETE FROM kinoteka WHERE id=?", (id))
     con.commit()
     con.close()
+
+def redaguoti_kino_data(id, kino_ID="", kino_pavadinimas="", isleidimo_data="", kino_biudzetas="", reitingas=""):
+    kursorius.execute("UPDATE kinoteka SET kino_ID=?, kino_pavadinimas=?, isleidimo_data=?, kino_biudzetas=?, reitingas=?, WHERE id=?",
+    (kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas))
+    con.commit()
+    con.close()
