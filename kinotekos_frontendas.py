@@ -1,3 +1,4 @@
+from abc import update_abstractmethods
 from tkinter import *
 import tkinter.messagebox
 import kinotekos_backendas
@@ -35,12 +36,14 @@ class Kinas:
                 kinotekos_backendas.prideti_filma(kino_ID.get(), kino_pavadinimas.get(), isleidimo_data.get(), kino_biudzetas.get(), reitingas.get())
                 FilmuSarasas.delete(0,END)
                 FilmuSarasas.insert(END,(kino_ID.get(), kino_pavadinimas.get(), isleidimo_data.get(), kino_biudzetas.get(), reitingas.get()))
-
-        def istrinti_data():
-            if(len(kino_ID.get())!=0):
-                kinotekos_backendas.istrinti_kino_data
-                cleardata()
         
+        def disdata():
+            FilmuSarasas.delete(0,END)
+            for row in kinotekos_backendas.kinu_datos_perziura():
+                FilmuSarasas.insert(END, row, str(""))
+
+                
+
         def filmusarasas(event):
             global sd
             pasirinkti_filma=FilmuSarasas.curselection()[0]
@@ -57,13 +60,19 @@ class Kinas:
             self.txtreitingas.delete(0,END)
             self.txtreitingas.insert(END,sd[8])
 
-            def updata():
-                if(len(kino_ID.get())!=0):
-                    kinotekos_backendas.istrinti_kino_data(sd[0])
-                if(len(kino_ID.get())!=0):
-                    kinotekos_backendas.prideti_filma(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get())
-                    FilmuSarasas.delete(0,END)
-                    FilmuSarasas.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(), kino_biudzetas.get(), reitingas.get()))
+        def istrinti_data():
+            if(len(kino_ID.get())!=0):
+                kinotekos_backendas.istrinti_kino_data
+                cleardata()
+                disdata()
+        
+        def atnaujinti():
+            if(len(kino_ID.get())!=0):
+                kinotekos_backendas.istrinti_kino_data(sd[0])
+            if(len(kino_ID.get())!=0):
+                kinotekos_backendas.prideti_filma(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get())
+                FilmuSarasas.delete(0,END)
+                FilmuSarasas.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(), kino_biudzetas.get(), reitingas.get()))
 
         
         # Frame'ai
@@ -130,16 +139,16 @@ class Kinas:
         self.btnadd=Button(Apatinis_Fr, text="Prideti Nauja", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=prideti_data)
         self.btnadd.grid(row=0, column=0)
 
-        self.btndis=Button(Apatinis_Fr, text="Rodyti Visus", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=filmusarasas)
+        self.btndis=Button(Apatinis_Fr, text="Rodyti Visus", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange")
         self.btndis.grid(row=0, column=1)
 
-        self.btnclc=Button(Apatinis_Fr, text="Isvalyti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=cleardata)
+        self.btnclc=Button(Apatinis_Fr, text="Isvalyti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=disdata)
         self.btnclc.grid(row=0, column=2)
 
         self.btndel=Button(Apatinis_Fr, text="Istrinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=istrinti_data)
         self.btndel.grid(row=0, column=4)
 
-        self.btnup=Button(Apatinis_Fr, text="Atnaujinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=filmusarasas)
+        self.btnup=Button(Apatinis_Fr, text="Atnaujinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=atnaujinti)
         self.btnup.grid(row=0, column=5)
 
         self.btnx=Button(Apatinis_Fr, text="Isjungti Programa", font=('Arial', 20, 'bold'), width=14, height=1, bd=4, bg="orange", command=iseiti)
