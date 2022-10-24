@@ -15,8 +15,41 @@ class Kinas():
         kino_biudzetas=StringVar()
         reitingas=StringVar()
 
+        # Funkcijos
+
         def iseiti():
             iseiti = tkinter.messagebox.askyesno("Tiketa", "Ar tikrai norite iseiti???")
             if iseiti>0:
                 root.destroy()
             return
+
+        def cleardata():
+            self.txtkino_ID.delete(0,END)
+            self.txtkino_pavadinimas.delete(0,END)
+            self.txtisleidimo_data(0,END)
+            self.txtkino_biudzetas(0,END)
+            self.txtreitingas(0,END)
+
+        def prideti_data():
+            if(len(kino_ID.get())!=0):
+                kinotekos_backendas.prideti_filma(
+                    kino_ID.get(), 
+                    kino_pavadinimas.get(),
+                    isleidimo_data.get(),
+                    kino_biudzetas.get(),
+                    reitingas.get()
+                )
+                KinuSarasas.delete(0,END)
+
+        # Frame'ai
+        Pagrindinis_Fr=Frame(self.root, bg="black")
+        Pagrindinis_Fr.grid()
+
+        
+
+
+        # Listbox'as ir Scrollbar'as
+
+        sb=Scrollbar(DFrameR)
+        sb.grid(row=0, column=1, sticky="ns")
+
