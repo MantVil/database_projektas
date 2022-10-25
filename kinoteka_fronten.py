@@ -35,7 +35,6 @@ class Kinas:
 		def adddata():
 			if(len(kino_ID.get())!=0):
 				kinotekos_backendas.pridet_filma(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get())
-				FilmuSarasas.delete(0,END)
 				FilmuSarasas.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get()))
 
 		def disdata():
