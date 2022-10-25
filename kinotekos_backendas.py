@@ -46,7 +46,7 @@ def istrinti_kino_data(id):
 def pasirinkti(kino_ID="",kino_pavadinimas="",isleidimo_data="",kino_biudzetas="",reitingas=""):  
     con=sqlite3.connect("kinoteka.db")    
     kursorius=con.cursor()
-    kursorius.execute("SELECT * FROM kinoteka WHERE kino_ID=? OR kino_pavadinimas=? OR isleidimo_data=? OR kino_biudzetas=? OR reitingas=?",(kino_ID,kino_pavadinimas,isleidimo_data,kino_biudzetas,reitingas))
+    kursorius.execute("SELECT * FROM kinoteka WHERE kino_ID=? OR kino_pavadinimas=? OR isleidimo_data=? OR kino_biudzetas=? OR reitingas=?", (kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas))
     rows=kursorius.fetchall()
     con.close()    
     return rows
@@ -54,7 +54,7 @@ def pasirinkti(kino_ID="",kino_pavadinimas="",isleidimo_data="",kino_biudzetas="
 def atnaujinti(id,kino_ID="",kino_pavadinimas="",isleidimo_data="",kino_biudzetas="", reitingas=""):
     con=sqlite3.connect("kinoteka.db")    
     kursorius=con.cursor()
-    kursorius.execute("UPDATE kinoteka SET kino_ID=?,kino_pavadinimas=?,isleidimo_data=?,kino_biudzetas=?, reitingas=?, WHERE id=?",(kino_ID,kino_pavadinimas,isleidimo_data,kino_biudzetas,reitingas))
+    kursorius.execute("UPDATE kinoteka SET kino_ID=?,kino_pavadinimas=?,isleidimo_data=?,kino_biudzetas=?, reitingas=?, WHERE id=?",(kino_ID, kino_pavadinimas, isleidimo_data, kino_biudzetas, reitingas))
     con.commit()
     con.close()
 
