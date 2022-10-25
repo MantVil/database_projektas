@@ -35,18 +35,18 @@ class Kinas:
 		def adddata():
 			if(len(kino_ID.get())!=0):
 				kinotekos_backendas.pridet_filma(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get())
-				MovieList.delete(0,END)
-				MovieList.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get()))
+				FilmuSarasas.delete(0,END)
+				FilmuSarasas.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get()))
 
 		def disdata():
-			MovieList.delete(0,END)
+			FilmuSarasas.delete(0,END)
 			for row in kinotekos_backendas.kinu_datos_perziura():
-				MovieList.insert(END, row, str(""))
+				FilmuSarasas.insert(END, row, str(""))
 
 		def movierec(event):
 			global sd
-			searchmovie=MovieList.curselection()[0]
-			sd=MovieList.get(searchmovie)
+			searchmovie=FilmuSarasas.curselection()[0]
+			sd=FilmuSarasas.get(searchmovie)
 
 			self.txtkino_ID.delete(0,END)
 			self.txtkino_ID.insert(END,sd[1])
@@ -66,17 +66,17 @@ class Kinas:
 				disdata()
 
 		def searchdb():
-			MovieList.delete(0,END)
+			FilmuSarasas.delete(0,END)
 			for row in kinotekos_backendas.pasirinkti(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data,kino_biudzetas.get(),reitingas.get()):
-				MovieList.insert(END, row, str(""))
+				FilmuSarasas.insert(END, row, str(""))
 
 		def updata():
 			if(len(kino_ID.get())!=0):
 				kinotekos_backendas.istrinti_kino_data(sd[0])
 			if(len(kino_ID.get())!=0):
 				kinotekos_backendas.pridet_filma(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get())
-				MovieList.delete(0,END)
-				MovieList.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get()))
+				FilmuSarasas.delete(0,END)
+				FilmuSarasas.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get()))
 
 		#Frames
 		MainFrame=Frame(self.root, bg="black")
@@ -102,28 +102,28 @@ class Kinas:
 
 		#Labels & Entry Box
 
-		self.lblMovie_ID=Label(DFrameL, font=('Arial', 18, 'bold'), text="Filmo ID:", padx=2, pady=2, bg="black", fg="orange")
-		self.lblMovie_ID.grid(row=0, column=0, sticky=W)
+		self.lblkino_ID=Label(DFrameL, font=('Arial', 18, 'bold'), text="Filmo ID:", padx=2, pady=2, bg="black", fg="orange")
+		self.lblkino_ID.grid(row=0, column=0, sticky=W)
 		self.txtkino_ID=Entry(DFrameL, font=('Arial', 18, 'bold'), textvariable=kino_ID, width=39, bg="black", fg="white")
 		self.txtkino_ID.grid(row=0, column=1) 
 
-		self.lblMovie_Name=Label(DFrameL, font=('Arial', 18, 'bold'), text="Filmo Pavadinimas:", padx=2, pady=2, bg="black", fg="orange")
-		self.lblMovie_Name.grid(row=1, column=0, sticky=W) 
+		self.lblkino_pavadinimas=Label(DFrameL, font=('Arial', 18, 'bold'), text="Filmo Pavadinimas:", padx=2, pady=2, bg="black", fg="orange")
+		self.lblkino_pavadinimas.grid(row=1, column=0, sticky=W) 
 		self.txtkino_pavadinimas=Entry(DFrameL, font=('Arial', 18, 'bold'), textvariable=kino_pavadinimas, width=39, bg="black", fg="white")
 		self.txtkino_pavadinimas.grid(row=1, column=1)
 
-		self.lblRelease_Date=Label(DFrameL, font=('Arial', 18, 'bold'), text="Isleidimo Data:", padx=2, pady=2, bg="black", fg="orange")
-		self.lblRelease_Date.grid(row=2, column=0, sticky=W) 
+		self.lblisleidimo_data=Label(DFrameL, font=('Arial', 18, 'bold'), text="Isleidimo Data:", padx=2, pady=2, bg="black", fg="orange")
+		self.lblisleidimo_data.grid(row=2, column=0, sticky=W) 
 		self.txtisleidimo_data=Entry(DFrameL, font=('Arial', 18, 'bold'), textvariable=isleidimo_data, width=39, bg="black", fg="white")
 		self.txtisleidimo_data.grid(row=2, column=1)
 
-		self.lblBudget=Label(DFrameL, font=('Arial', 18, 'bold'), text="Biudzetas (Eurais):", padx=2, pady=2, bg="black", fg="orange")
-		self.lblBudget.grid(row=5, column=0, sticky=W) 
+		self.lblkino_biudzetas=Label(DFrameL, font=('Arial', 18, 'bold'), text="Biudzetas (Eurais):", padx=2, pady=2, bg="black", fg="orange")
+		self.lblkino_biudzetas.grid(row=5, column=0, sticky=W) 
 		self.txtkino_biudzetas=Entry(DFrameL, font=('Arial', 18, 'bold'), textvariable=kino_biudzetas, width=39, bg="black", fg="white")
 		self.txtkino_biudzetas.grid(row=5, column=1)
 
-		self.lblRating=Label(DFrameL, font=('Arial', 18, 'bold'), text="Reitingas (Out of 5):", padx=2, pady=2, bg="black", fg="orange")
-		self.lblRating.grid(row=7, column=0, sticky=W) 
+		self.lblreitingas=Label(DFrameL, font=('Arial', 18, 'bold'), text="Reitingas (Out of 5):", padx=2, pady=2, bg="black", fg="orange")
+		self.lblreitingas.grid(row=7, column=0, sticky=W) 
 		self.txtreitingas=Entry(DFrameL, font=('Arial', 18, 'bold'), textvariable=reitingas, width=39, bg="black", fg="white")
 		self.txtreitingas.grid(row=7, column=1)
 
@@ -131,10 +131,10 @@ class Kinas:
 		sb=Scrollbar(DFrameR)
 		sb.grid(row=0, column=1, sticky='ns')
 
-		MovieList=Listbox(DFrameR, width=41, height=16, font=('Arial', 12, 'bold'), bg="black", fg="white", yscrollcommand=sb.set)
-		MovieList.bind('<<ListboxSelect>>', movierec)
-		MovieList.grid(row=0, column=0, padx=8)
-		sb.config(command=MovieList.yview)
+		FilmuSarasas=Listbox(DFrameR, width=41, height=16, font=('Arial', 12, 'bold'), bg="black", fg="white", yscrollcommand=sb.set)
+		FilmuSarasas.bind('<<ListboxSelect>>', movierec)
+		FilmuSarasas.grid(row=0, column=0, padx=8)
+		sb.config(command=FilmuSarasas.yview)
 
 		#Buttons
 		self.btnadd=Button(BFrame, text="Prideti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=adddata)

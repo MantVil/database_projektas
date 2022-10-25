@@ -1,9 +1,9 @@
 #backend
 import sqlite3
 
-
 con=sqlite3.connect("kinoteka.db") 
 kursorius=con.cursor()
+
 with con:
     kursorius.execute(
         """CREATE TABLE IF NOT EXISTS 
