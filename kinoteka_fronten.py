@@ -17,7 +17,7 @@ class Kinas:
 		kino_biudzetas=StringVar()
 		reitingas=StringVar()
 
-		#Fuctions
+		#Fuction'as
 		def iExit():
 			iExit=tkinter.messagebox.askyesno("Tiketa", "Ar tikrai norite iseiti???")
 			if iExit>0:
@@ -35,6 +35,7 @@ class Kinas:
 		def adddata():
 			if(len(kino_ID.get())!=0):
 				kinotekos_backendas.pridet_filma(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get())
+				FilmuSarasas.delete(0,END)
 				FilmuSarasas.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get()))
 
 		def disdata():
@@ -42,7 +43,7 @@ class Kinas:
 			for row in kinotekos_backendas.kinu_datos_perziura():
 				FilmuSarasas.insert(END, row, str(""))
 
-		def movierec(event):
+		def kinurec(event):
 			global sd
 			searchmovie=FilmuSarasas.curselection()[0]
 			sd=FilmuSarasas.get(searchmovie)
@@ -77,7 +78,7 @@ class Kinas:
 				FilmuSarasas.delete(0,END)
 				FilmuSarasas.insert(END,(kino_ID.get(),kino_pavadinimas.get(),isleidimo_data.get(),kino_biudzetas.get(),reitingas.get()))
 
-		#Frames
+		#Frame'ai
 		MainFrame=Frame(self.root, bg="black")
 		MainFrame.grid()
 
@@ -99,7 +100,7 @@ class Kinas:
 		DFrameR=LabelFrame(DFrame, bd=2, width=450, height=300, padx=31, pady=3, bg="black", relief=RIDGE, font=('Arial', 20, 'bold'), text="Filmu Sablonas_\n", fg="white")
 		DFrameR.pack(side=RIGHT)
 
-		#Labels & Entry Box
+		#Label'iai & Entry Box'as
 
 		self.lblkino_ID=Label(DFrameL, font=('Arial', 18, 'bold'), text="Filmo ID:", padx=2, pady=2, bg="black", fg="orange")
 		self.lblkino_ID.grid(row=0, column=0, sticky=W)
@@ -126,16 +127,16 @@ class Kinas:
 		self.txtreitingas=Entry(DFrameL, font=('Arial', 18, 'bold'), textvariable=reitingas, width=39, bg="black", fg="white")
 		self.txtreitingas.grid(row=7, column=1)
 
-		#ListBox & ScrollBar
+		#ListBox'as & ScrollBar'as
 		sb=Scrollbar(DFrameR)
 		sb.grid(row=0, column=1, sticky='ns')
 
 		FilmuSarasas=Listbox(DFrameR, width=41, height=16, font=('Arial', 12, 'bold'), bg="black", fg="white", yscrollcommand=sb.set)
-		FilmuSarasas.bind('<<ListboxSelect>>', movierec)
+		FilmuSarasas.bind('<<ListboxSelect>>', kinurec)
 		FilmuSarasas.grid(row=0, column=0, padx=8)
 		sb.config(command=FilmuSarasas.yview)
 
-		#Buttons
+		#Button'as
 		self.btnadd=Button(BFrame, text="Prideti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=adddata)
 		self.btnadd.grid(row=0, column=0)
 
