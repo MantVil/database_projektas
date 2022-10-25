@@ -4,12 +4,12 @@ from tkinter import *
 import tkinter.messagebox
 import kinotekos_backendas
 
-class Movie:
+class Kinas:
 	def __init__(self, root):
 		self.root=root
 		self.root.title("Kino Bilietai")
 		self.root.geometry("")
-		self.root.config(bg="green")
+		self.root.config(bg="red")
 		
 		kino_pavadinimas=StringVar()
 		kino_ID=StringVar()
@@ -88,16 +88,16 @@ class Movie:
 		self.TFrame=Label(TFrame, font=('Arial', 51, 'bold'), text="Kino Bilietu Data", bg="black", fg="orange")
 		self.TFrame.grid() 
 
-		BFrame=Frame(MainFrame, bd=2, width=1350, height=70, padx=18, pady=10, bg="green", relief=RIDGE)
+		BFrame=Frame(MainFrame, bd=2, width=1350, height=70, padx=18, pady=10, bg="orange", relief=RIDGE)
 		BFrame.pack(side=BOTTOM)
 
 		DFrame=Frame(MainFrame, bd=2, width=1300, height=400, padx=20, pady=20, bg="black", relief=RIDGE)
 		DFrame.pack(side=BOTTOM)
 
-		DFrameL=LabelFrame(DFrame, bd=2, width=1000, height=600, padx=20, bg="black", relief=RIDGE, font=('Arial', 20, 'bold'), text="Movie Info_\n", fg="white")
+		DFrameL=LabelFrame(DFrame, bd=2, width=1000, height=600, padx=20, bg="black", relief=RIDGE, font=('Arial', 20, 'bold'), text="Filmu Info_\n", fg="white")
 		DFrameL.pack(side=LEFT)
 
-		DFrameR=LabelFrame(DFrame, bd=2, width=450, height=300, padx=31, pady=3, bg="black", relief=RIDGE, font=('Arial', 20, 'bold'), text="Movie Details_\n", fg="white")
+		DFrameR=LabelFrame(DFrame, bd=2, width=450, height=300, padx=31, pady=3, bg="black", relief=RIDGE, font=('Arial', 20, 'bold'), text="Filmu Sablonas_\n", fg="white")
 		DFrameR.pack(side=RIGHT)
 
 		#Labels & Entry Box
@@ -137,29 +137,29 @@ class Movie:
 		sb.config(command=MovieList.yview)
 
 		#Buttons
-		self.btnadd=Button(BFrame, text="Add New", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=adddata)
+		self.btnadd=Button(BFrame, text="Prideti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=adddata)
 		self.btnadd.grid(row=0, column=0)
 
-		self.btndis=Button(BFrame, text="Display", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=disdata)
+		self.btndis=Button(BFrame, text="Rodyti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=disdata)
 		self.btndis.grid(row=0, column=1)
 
-		self.btnclc=Button(BFrame, text="Clear", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=clcdata)
+		self.btnclc=Button(BFrame, text="Isvalyti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=clcdata)
 		self.btnclc.grid(row=0, column=2)
 
-		self.btnse=Button(BFrame, text="Search", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=searchdb)
+		self.btnse=Button(BFrame, text="Ieskoti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=searchdb)
 		self.btnse.grid(row=0, column=3)
 
-		self.btndel=Button(BFrame, text="Delete", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=deldata)
+		self.btndel=Button(BFrame, text="Istrinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=deldata)
 		self.btndel.grid(row=0, column=4)
 
-		self.btnup=Button(BFrame, text="Update", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=updata)
+		self.btnup=Button(BFrame, text="Atnaujinti", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=updata)
 		self.btnup.grid(row=0, column=5)
 
-		self.btnx=Button(BFrame, text="Exit", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=iExit)
+		self.btnx=Button(BFrame, text="Exit'as", font=('Arial', 20, 'bold'), width=10, height=1, bd=4, bg="orange", command=iExit)
 		self.btnx.grid(row=0, column=6)
 
 
 if __name__=='__main__':
 	root=Tk()
-	datbase=Movie(root)
+	datbase=Kinas(root)
 	root.mainloop()
